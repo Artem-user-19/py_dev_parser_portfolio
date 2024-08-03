@@ -25,18 +25,22 @@ def parse_work_ua(base_url):
             title = title_tag.get_text(strip=True) if title_tag else "N/A"
 
             company_tag = work_tag.find("span", class_="mr-xs")
-            company = company_tag.get_text(strip=True) if company_tag else "N/A"
+            company = company_tag.get_text(strip=True)\
+                if company_tag else "N/A"
 
             salary_tag = work_tag.find("span", class_="strong-600")
             salary = salary_tag.get_text(strip=True) if salary_tag else "N/A"
 
             if re.search(r'\d', salary):
-                cleaned_salary = re.sub(r'[\u202f\u2009\xa0]', ' ', salary).strip()
+                cleaned_salary = re.sub(
+                    r'[\u202f\u2009\xa0]', ' ', salary
+                ).strip()
             else:
                 cleaned_salary = "N/A"
 
             link_tag = work_tag.find("a", href=True)
-            link = f"https://www.work.ua{link_tag['href']}" if link_tag else "N/A"
+            link = f"https://www.work.ua{link_tag['href']}"\
+                if link_tag else "N/A"
 
             jobs.append({
                 'title': title,
@@ -48,7 +52,9 @@ def parse_work_ua(base_url):
         pagination = soup.find("ul", class_="pagination hidden-xs")
         if pagination:
             page_links = pagination.find_all("a", href=True)
-            page_numbers = [int(a.get_text(strip=True)) for a in page_links if a.get_text(strip=True).isdigit()]
+            page_numbers = [int(a.get_text(strip=True))
+                            for a in page_links
+                            if a.get_text(strip=True).isdigit()]
 
             if page_numbers and page_number >= max(page_numbers):
                 break
@@ -60,7 +66,8 @@ def parse_work_ua(base_url):
     return jobs
 
 
-base_url = "https://www.work.ua/jobs-remote-python-%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%96%D1%81%D1%82/"
+base_url = ("https://www.work.ua/jobs-remote-python-"
+            "%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D1%96%D1%81%D1%82/")
 job_data = parse_work_ua(base_url)
 
 df = pd.DataFrame(job_data)
