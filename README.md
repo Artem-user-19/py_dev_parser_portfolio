@@ -2,9 +2,10 @@
 This project was created for parsing python developer remote vacancies and analize their max values, min values and averages values for best salary understanding.
 ## How to use it?
 ### Installing
+- Switch to `develop` branch
 - Go to `<> Code` button
 - Copy `HTTPS` link
-- Paste to cmd, write commmand `git clone [link]`
+- Paste to cmd, write command `git clone [link]`
 ### Code redactor part
 - Write in console `cd app` command
 - Install all libs

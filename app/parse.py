@@ -68,9 +68,10 @@ def parse_work_ua(base_url):
     return jobs
 
 
-base_url = main_url
-job_data = parse_work_ua(base_url)
+if __name__ == '__main__':
+    base_url = main_url
+    job_data = parse_work_ua(base_url)
 
-df = pd.DataFrame(job_data)
+    df = pd.DataFrame(job_data)
 
-df.to_csv('job_data.csv', index=False, encoding='utf-8')
+    df.to_csv('job_data.csv', index=False, encoding='utf-8')
