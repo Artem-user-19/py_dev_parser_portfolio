@@ -4,7 +4,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
-from parse_link import main_url
+from parse_link import MAIN_URL
 
 
 def parse_work_ua(base_url):
@@ -69,7 +69,7 @@ def parse_work_ua(base_url):
 
 
 if __name__ == '__main__':
-    base_url = main_url
+    base_url = MAIN_URL
     job_data = parse_work_ua(base_url)
 
     df = pd.DataFrame(job_data)
